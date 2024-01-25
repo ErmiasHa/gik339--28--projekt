@@ -24,7 +24,11 @@ server.listen(3003, () => {
 
 const db = new sqlite3.Database("database.db");
 
-// API Endpoint: Get all cars
+
+
+
+
+//  Hämtar alla billar 
 server.get("/api/cars", (req, res) => {
   db.all("SELECT * FROM cars", (err, rows) => {
     if (err) {
@@ -36,7 +40,7 @@ server.get("/api/cars", (req, res) => {
   });
 });
 
-// API Endpoint: Get a specific car by licenseplate
+// API Endpoint: Hämta Specifik Bil by licenseplate
 server.get("/api/cars/:licenseplate", (req, res) => {
   const licenseplate = req.params.licenseplate;
   db.get("SELECT * FROM cars WHERE licenseplate = ?", [licenseplate], (err, row) => {
@@ -53,7 +57,9 @@ server.get("/api/cars/:licenseplate", (req, res) => {
   });
 });
 
-// API Endpoint: Add new car
+
+
+// Läggar Till Ny Bil 
 server.post("/api/cars", (req, res) => {
   const { make, model, licenseplate, color, year, mileage } = req.body;
   const yearNum = parseInt(year, 10);
@@ -75,7 +81,8 @@ server.post("/api/cars", (req, res) => {
   });
 });
 
-// API Endpoint: Update a specific car by licenseplate
+
+//  Uppdatera Bilinformation by licenseplate
 server.put("/api/cars/:licenseplate", (req, res) => {
   const licenseplate = req.params.licenseplate;
   const { make, model, color, year, mileage } = req.body;
@@ -98,7 +105,8 @@ server.put("/api/cars/:licenseplate", (req, res) => {
   });
 });
 
-// API Endpoint: Delete a specific car by licenseplate
+
+//  Delete a specific car by licenseplate
 server.delete("/api/cars/:licenseplate", (req, res) => {
   const licenseplate = req.params.licenseplate;
 
@@ -115,6 +123,8 @@ server.delete("/api/cars/:licenseplate", (req, res) => {
     res.json({ message: "Car deleted successfully" });
   });
 });
+
+
 
 // Middleware for error handling
 server.use((err, req, res, next) => {

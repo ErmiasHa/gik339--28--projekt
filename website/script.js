@@ -20,6 +20,7 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     }
 
+    
     function areAllInputsFilled() {
         return Array.from(requiredInputs).every(input => input.value.trim() !== '');
     }
